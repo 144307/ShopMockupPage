@@ -1,0 +1,26 @@
+.card {
+  /* max-width: 200px; */
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  outline: 2px solid red;
+}
+
+.addToCart {
+  position: relative;
+}
+
+.addToCart__counter {
+  display: flex;
+  gap: 3px;
+  /* outline: 1px solid blue; */
+}
+
+.addToCart__button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

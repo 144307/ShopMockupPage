@@ -1,0 +1,14 @@
+.cart-item {
+  display: flex;
+  gap: 10px;
+  /* justify-content: center; */
+  align-items: center;
+  outline: 2px solid rgb(0, 203, 0);
+}
+
+.cart-item__menu {
+  display: flex;
+  gap: 3px;
+  /* justify-content: center;
+  align-items: center; */
+}
