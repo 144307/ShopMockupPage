@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import "./Card.css";
-import { CartContext, CartDispatchContext } from "../CartContext";
+import { CartContext } from "../CartContext";
 import { product } from "../types";
 
 interface Props {
@@ -10,8 +10,8 @@ interface Props {
 function Card({ product }: Props) {
   const [amount, setAmount] = useState(0);
 
-  const cart = useContext(CartContext);
-  const dispatch = useContext(CartDispatchContext);
+  const context = useContext(CartContext);
+  // const dispatch = useContext(CartDispatchContext);
 
   const addButton = useRef<HTMLButtonElement>(null);
   const addToCart = useRef<HTMLDivElement>(null);
@@ -28,16 +28,28 @@ function Card({ product }: Props) {
     }
   }, [amount]);
 
+  useEffect(() => {
+    console.log("check amount in context");
+    const foundItemInCart = context?.cart.find(
+      (e) => e.product.id === product.id
+    );
+    if (foundItemInCart) {
+      setAmount(foundItemInCart.amount);
+    } else {
+      setAmount(0);
+    }
+  }, [context]);
+
   function increaseAmount(product: product) {
     // console.log("id to increase", product);
     // dispatch({ type: "add", id: product.id, name: product.name });
-    dispatch({ type: "add", product: product });
-    setAmount(amount + 1);
+    context?.dispatch({ type: "add", product: product });
+    // setAmount(amount + 1);
   }
   function decreaseAmount(product: product) {
     if (amount >= 1) {
-      dispatch({ type: "remove", product: product });
-      setAmount(amount - 1);
+      context?.dispatch({ type: "decrease", product: product });
+      // setAmount(amount - 1);
     }
   }
 
@@ -76,9 +88,10 @@ function Card({ product }: Props) {
               console.log("test");
             }}
           >
-            {cart.find((e) => e.product.id === product.id)
-              ? "item in cart"
-              : amount}
+            {/* {context?.cart.find((e) => e.product.id === product.id)
+              ? "item in context"
+              : amount} */}
+            {amount}
           </div>
           <input
             type="button"
@@ -89,6 +102,11 @@ function Card({ product }: Props) {
             value={"+"}
           ></input>
         </div>
+      </div>
+
+      <div className="states">
+        <h4 className="states__heading">States</h4>
+        <div>{"amount: " + amount}</div>
       </div>
     </div>
   );

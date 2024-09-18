@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import { CartContext, CartDispatchContext } from "../CartContext";
+import { useContext, useEffect } from "react";
+import { CartContext } from "../CartContext";
 import { cartItem } from "../types";
 import "./CartBlock.css";
 
@@ -10,14 +10,18 @@ import "./CartBlock.css";
 
 // { cart, children }: Props
 function CartBlock() {
-  const cart = useContext(CartContext);
-  const dispatch = useContext(CartDispatchContext);
+  const context = useContext(CartContext);
+
+  // useEffect(() => {
+  // }, [context]);
+
+  // const dispatch = useContext(CartDispatchContext);
 
   return (
     <div>
       <h3>Корзина</h3>
-      <div>{"Количество товаров в корзине: " + cart.length}</div>
-      {cart.map((cartItem: cartItem) => {
+      <div>{"Количество товаров в корзине: " + context?.cart.length}</div>
+      {context?.cart.map((cartItem: cartItem) => {
         return (
           <div key={"cartItem" + cartItem.product.id} className="cart-item">
             <p>{"Название: " + cartItem.product.name}</p>

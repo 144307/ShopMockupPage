@@ -1,5 +1,10 @@
 import { createContext } from "react";
-import { cartItem } from "./types";
+import { MyContext } from "./types";
 
-export const CartContext = createContext<cartItem[]>([]);
-export const CartDispatchContext = createContext<cartItem[]>([]);
+// export interface MyContext {
+//   cart: cartItem[];
+//   dispatch: React.Dispatch<MyAction>
+// }
+
+export const CartContext = createContext<MyContext | null>(null);
+// export const CartDispatchContext = createContext<cartItem[]>([]);
