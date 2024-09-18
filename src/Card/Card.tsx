@@ -17,14 +17,18 @@ function Card({ product }: Props) {
   const addToCart = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (amount > 0) {
-      addButton.current.style.visibility = "hidden";
-      addToCart.current.style.visibility = "visible";
-    } else if (amount === 0) {
-      addButton.current.style.visibility = "visible";
-      addToCart.current.style.visibility = "hidden";
+    if (addButton.current && addToCart.current) {
+      if (amount > 0) {
+        addButton.current.style.visibility = "hidden";
+        addToCart.current.style.visibility = "visible";
+      } else if (amount === 0) {
+        addButton.current.style.visibility = "visible";
+        addToCart.current.style.visibility = "hidden";
+      } else {
+        throw new Error("wrong amount");
+      }
     } else {
-      throw new Error("wrong amount");
+      throw new Error("addButton.current or addToCart.current undefined");
     }
   }, [amount]);
 
@@ -46,9 +50,9 @@ function Card({ product }: Props) {
     context?.dispatch({ type: "add", product: product });
     // setAmount(amount + 1);
   }
-  function decreaseAmount(product: product) {
+  function removeAmount(product: product) {
     if (amount >= 1) {
-      context?.dispatch({ type: "decrease", product: product });
+      context?.dispatch({ type: "remove", product: product });
       // setAmount(amount - 1);
     }
   }
@@ -77,7 +81,7 @@ function Card({ product }: Props) {
             type="button"
             className="addToCart__control"
             onClick={() => {
-              decreaseAmount(product);
+              removeAmount(product);
             }}
             value={"-"}
           ></input>

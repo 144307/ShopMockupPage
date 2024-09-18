@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { CartContext } from "../CartContext";
 import { cartItem } from "../types";
 import "./CartBlock.css";
@@ -27,9 +27,33 @@ function CartBlock() {
             <p>{"Название: " + cartItem.product.name}</p>
             <div>{"Количество: " + cartItem.amount}</div>
             <div className="cart-item__menu">
-              <input type="button" value={"-"}></input>
-              <input type="button" value={"+"}></input>
-              <input type="button" value={"Удалить"}></input>
+              <input
+                type="button"
+                value={"-"}
+                onClick={() => {
+                  context?.dispatch({
+                    type: "remove",
+                    product: cartItem.product,
+                  });
+                }}
+              ></input>
+              <input
+                type="button"
+                value={"+"}
+                onClick={() => {
+                  context?.dispatch({ type: "add", product: cartItem.product });
+                }}
+              ></input>
+              <input
+                type="button"
+                value={"Удалить"}
+                onClick={() => {
+                  context?.dispatch({
+                    type: "delete",
+                    product: cartItem.product,
+                  });
+                }}
+              ></input>
             </div>
           </div>
         );
