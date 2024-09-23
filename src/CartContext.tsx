@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, ReactNode, useReducer } from "react";
 import { cartItem, MyContext } from "./types";
 
 // export interface MyContext {
@@ -66,7 +66,6 @@ function cartReducer(
       throw Error("Product id " + action.product.id + " doesn't exist in cart");
 
     case "delete":
-      console.log("delete");
       return cart.filter((_, i) => i !== itemIndex);
     default:
       throw Error("Unknown action: " + action.type);

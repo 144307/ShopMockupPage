@@ -2,21 +2,17 @@ import Card from "../Card/Card";
 import "./MainPage.css";
 import CartBlock from "../CartBlock/CartBlock";
 import { CartProvider } from "../CartContext";
-// import NavMenuButton from "../NavMenuButton/NavMenuButton";
 
 function MainPage() {
   return (
     <>
       <CartProvider>
         <CartBlock></CartBlock>
-        {/* <NavMenuButton></NavMenuButton> */}
         <div className="grid">
           {Array.from(Array(7)).map((_, i) => {
-            // console.log("check", i);
             return (
               <Card product={{ id: i, name: "test" + i, price: i ** 2 }}></Card>
             );
-            // return <div>test</div>;
           })}
         </div>
       </CartProvider>

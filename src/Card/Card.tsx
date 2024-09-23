@@ -108,10 +108,10 @@ function Card({ product }: Props) {
         </div>
       </div>
 
-      <div className="states">
+      {/* <div className="states">
         <h4 className="states__heading">States</h4>
         <div>{"amount: " + amount}</div>
-      </div>
+      </div> */}
     </div>
   );
 }
