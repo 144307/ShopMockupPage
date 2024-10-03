@@ -3,7 +3,7 @@
   gap: 10px;
   /* justify-content: center; */
   align-items: center;
-  outline: 2px solid rgb(0, 203, 0);
+  /* outline: 2px solid rgb(0, 203, 0); */
 }
 
 .cart-item__menu {
@@ -24,5 +24,5 @@
   padding: 5px;
   z-index: 1;
   /* outline: 3px solid blue; */
-  background-color: cyan;
+  background-color: rgb(143, 255, 255);
 }

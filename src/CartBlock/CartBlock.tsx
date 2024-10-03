@@ -1,27 +1,16 @@
-import { useContext, useRef } from "react";
-import { CartContext } from "../CartContext";
+import { useRef } from "react";
 import { cartItem } from "../types";
+import { increment, clear, decrement, deleteFromCart } from "../cartSlice";
 import "./CartBlock.css";
-
-// interface Props {
-//   cart: React.Context<number>;
-//   children: string;
-// }
-
-// { cart, children }: Props
+import { useDispatch, useSelector } from "react-redux";
 
 function CartBlock() {
-  const context = useContext(CartContext);
-
-  // useEffect(() => {
-  // }, [context]);
-
-  // const dispatch = useContext(CartDispatchContext);
+  const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
   const cartContext = useRef<HTMLDivElement>(null);
 
   function toggleCart() {
-    console.log("context", context);
     if (
       cartContext.current &&
       cartContext.current.style.visibility === "hidden"
@@ -32,10 +21,10 @@ function CartBlock() {
     }
   }
 
-  const cartContent = (context) => {
+  const cartContent = () => {
     return (
       <>
-        {context?.cart.map((cartItem: cartItem) => {
+        {cart.items.map((cartItem: cartItem) => {
           return (
             <div key={"cartItem" + cartItem.product.id} className="cart-item">
               <p>{"Название: " + cartItem.product.name}</p>
@@ -45,30 +34,36 @@ function CartBlock() {
                   type="button"
                   value={"-"}
                   onClick={() => {
-                    context?.dispatch({
-                      type: "remove",
-                      product: cartItem.product,
-                    });
+                    // context?.dispatch({
+                    //   type: "remove",
+                    //   product: cartItem.product,
+                    // });
+                    dispatch(decrement(cartItem.product));
                   }}
                 ></input>
                 <input
                   type="button"
                   value={"+"}
                   onClick={() => {
-                    context?.dispatch({
-                      type: "add",
-                      product: cartItem.product,
-                    });
+                    // context?.dispatch({
+                    //   type: "add",
+                    //   product: cartItem.product,
+                    // });
+                    dispatch(increment(cartItem.product));
+
+                    console.log("add");
                   }}
                 ></input>
                 <input
                   type="button"
                   value={"Удалить"}
                   onClick={() => {
-                    context?.dispatch({
-                      type: "delete",
-                      product: cartItem.product,
-                    });
+                    dispatch(deleteFromCart(cartItem.product));
+                    // context?.dispatch({
+                    //   type: "delete",
+                    //   product: cartItem.product,
+                    // });
+                    console.log("delete");
                   }}
                 ></input>
               </div>
@@ -84,10 +79,10 @@ function CartBlock() {
       <button className="cart__button" onClick={toggleCart}>
         Корзина
       </button>
-      <div>{"Количество товаров в корзине: " + context?.cart.length}</div>
+      <div>{"Количество товаров в корзине: " + cart.items.length}</div>
       {/* <div>{cartContent()}</div> */}
       <div className="cart__content" ref={cartContext}>
-        {context?.cart.length ? cartContent(context) : <div>No items</div>}
+        {cart.items.length ? cartContent() : <div>No items</div>}
       </div>
     </div>
   );

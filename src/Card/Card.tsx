@@ -1,16 +1,21 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./Card.css";
 import { CartContext } from "../CartContext";
 import { product } from "../types";
+import { useDispatch, useSelector } from "react-redux";
+import { increment, decrement } from "../cartSlice";
 
 interface Props {
   product: product;
 }
 
 function Card({ product }: Props) {
+  const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+
   const [amount, setAmount] = useState(0);
 
-  const context = useContext(CartContext);
+  // const context = useContext(CartContext);
   // const dispatch = useContext(CartDispatchContext);
 
   const addButton = useRef<HTMLButtonElement>(null);
@@ -33,60 +38,66 @@ function Card({ product }: Props) {
   }, [amount]);
 
   useEffect(() => {
-    console.log("check amount in context");
-    const foundItemInCart = context?.cart.find(
-      (e) => e.product.id === product.id
-    );
+    // const foundItemInCart = context?.cart.find(
+    //   (e) => e.product.id === product.id
+    // );
+    const foundItemInCart = cart.items.find((e) => e.product.id === product.id);
     if (foundItemInCart) {
       setAmount(foundItemInCart.amount);
     } else {
       setAmount(0);
     }
-  }, [context]);
+  }, [cart.items]);
 
-  function increaseAmount(product: product) {
+  function addProduct(product: product) {
     // console.log("id to increase", product);
     // dispatch({ type: "add", id: product.id, name: product.name });
-    context?.dispatch({ type: "add", product: product });
+    // context?.dispatch({ type: "add", product: product });
+    dispatch(increment(product));
     // setAmount(amount + 1);
   }
-  function removeAmount(product: product) {
+  function removeProduct(product: product) {
     if (amount >= 1) {
-      context?.dispatch({ type: "remove", product: product });
+      // context?.dispatch({ type: "remove", product: product });
+      dispatch(decrement(product));
       // setAmount(amount - 1);
     }
   }
 
   return (
     <div className="card" id={"card" + product.id.toString()} key={product.id}>
-      <img className="card__image" alt="image" />
+      <img
+        className="card__image"
+        src="https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png"
+        alt="image"
+      />
       <h3 className="card__heading">card__heading</h3>
-      <div>
+      <div className="card__description">
         <div>{"id: " + product.id}</div>
         <div>{"name: " + product.name}</div>
         <div>{"price: " + product.price}</div>
       </div>
       <div className="addToCart" ref={addToCart}>
         <button
-          className="addToCart__button"
+          className="addToCart__button addToCart__button_add"
           ref={addButton}
           onClick={() => {
-            increaseAmount(product);
+            addProduct(product);
           }}
         >
           button
         </button>
-        <div className="addToCart__counter">
+        <div className="addToCart__quantity-controls">
           <input
             type="button"
-            className="addToCart__control"
+            className="addToCart__button addToCart__value-button"
             onClick={() => {
-              removeAmount(product);
+              removeProduct(product);
             }}
             value={"-"}
           ></input>
           <div
-            className="addToCart__amount"
+            className="addToCart__counter"
             // contentEditable="true"
             onClick={() => {
               console.log("test");
@@ -99,19 +110,14 @@ function Card({ product }: Props) {
           </div>
           <input
             type="button"
-            className="addToCart__control"
+            className="addToCart__button addToCart__value-button"
             onClick={() => {
-              increaseAmount(product);
+              addProduct(product);
             }}
             value={"+"}
           ></input>
         </div>
       </div>
-
-      {/* <div className="states">
-        <h4 className="states__heading">States</h4>
-        <div>{"amount: " + amount}</div>
-      </div> */}
     </div>
   );
 }

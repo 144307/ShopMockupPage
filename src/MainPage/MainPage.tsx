@@ -1,36 +1,34 @@
 import Card from "../Card/Card";
 import "./MainPage.css";
 import CartBlock from "../CartBlock/CartBlock";
-import { CartProvider } from "../CartContext";
+import { useDispatch, useSelector } from "react-redux";
+import { clear } from "../cartSlice";
+import { cartItem } from "../types";
 
 function MainPage() {
+  const cart = useSelector((state) => state.cart.items);
+  const dispatch = useDispatch();
+
   return (
-    <>
-      <CartProvider>
-        <CartBlock></CartBlock>
-        <div className="grid">
-          {Array.from(Array(7)).map((_, i) => {
-            return (
-              <Card product={{ id: i, name: "test" + i, price: i ** 2 }}></Card>
-            );
-          })}
-        </div>
-      </CartProvider>
-      {/* <div className="states">
-        <h4 className="states__heading">States</h4>
-        {context?.cart.map((e: cartItem) => {
-          console.log("check", e);
+    <div className="main-page">
+      <div className="redux-cart">
+        <button
+          onClick={() => {
+            dispatch(clear());
+          }}
+        >
+          Clear
+        </button>
+      </div>
+      <CartBlock></CartBlock>
+      <div className="grid">
+        {Array.from(Array(70)).map((_, i) => {
           return (
-            <>
-              <div>{"id: " + e.product.id}</div>
-              <div>{"name: " + e.product.name}</div>
-              <div>{"price: " + e.product.price}</div>
-              <div>{"amount: " + e.amount}</div>
-            </>
+            <Card product={{ id: i, name: "test" + i, price: i ** 2 }}></Card>
           );
         })}
-      </div> */}
-    </>
+      </div>
+    </div>
   );
 }
 
