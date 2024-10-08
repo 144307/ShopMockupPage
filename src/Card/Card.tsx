@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./Card.css";
-import { CartContext } from "../CartContext";
-import { product } from "../types";
-import { useDispatch, useSelector } from "react-redux";
+import { cartItem, product } from "../types";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { increment, decrement } from "../cartSlice";
 
 interface Props {
@@ -10,7 +9,8 @@ interface Props {
 }
 
 function Card({ product }: Props) {
-  const cart = useSelector((state) => state.cart);
+  console.log("render");
+  const cart = useSelector((state) => state.cart, shallowEqual);
   const dispatch = useDispatch();
 
   const [amount, setAmount] = useState(0);
@@ -41,13 +41,15 @@ function Card({ product }: Props) {
     // const foundItemInCart = context?.cart.find(
     //   (e) => e.product.id === product.id
     // );
-    const foundItemInCart = cart.items.find((e) => e.product.id === product.id);
+    const foundItemInCart = cart.items.find(
+      (e: cartItem) => e.product.id === product.id
+    );
     if (foundItemInCart) {
       setAmount(foundItemInCart.amount);
     } else {
       setAmount(0);
     }
-  }, [cart.items]);
+  }, [cart]);
 
   function addProduct(product: product) {
     // console.log("id to increase", product);
@@ -99,9 +101,6 @@ function Card({ product }: Props) {
           <div
             className="addToCart__counter"
             // contentEditable="true"
-            onClick={() => {
-              console.log("test");
-            }}
           >
             {/* {context?.cart.find((e) => e.product.id === product.id)
               ? "item in context"

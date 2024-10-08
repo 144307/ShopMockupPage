@@ -26,7 +26,6 @@ const cartSlice = createSlice({
       const index = state.items.findIndex(
         (e) => e.product.id === action.payload.id
       );
-      console.log("state", current(state), action.payload.id);
       if (index != -1) {
         state.items[index].amount++;
       } else {
@@ -37,9 +36,6 @@ const cartSlice = createSlice({
       const index = state.items.findIndex(
         (e) => e.product.id === action.payload.id
       );
-      console.log("state", current(state), action.payload.id);
-      console.log("index", index);
-      console.log(index, state.items[index]);
       if (state.items[index].amount > 1) {
         state.items[index].amount--;
       } else {

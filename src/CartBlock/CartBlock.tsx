@@ -2,10 +2,10 @@ import { useRef } from "react";
 import { cartItem } from "../types";
 import { increment, clear, decrement, deleteFromCart } from "../cartSlice";
 import "./CartBlock.css";
-import { useDispatch, useSelector } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 
 function CartBlock() {
-  const cart = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.cart, shallowEqual);
   const dispatch = useDispatch();
 
   const cartContext = useRef<HTMLDivElement>(null);
@@ -34,10 +34,6 @@ function CartBlock() {
                   type="button"
                   value={"-"}
                   onClick={() => {
-                    // context?.dispatch({
-                    //   type: "remove",
-                    //   product: cartItem.product,
-                    // });
                     dispatch(decrement(cartItem.product));
                   }}
                 ></input>
@@ -45,13 +41,7 @@ function CartBlock() {
                   type="button"
                   value={"+"}
                   onClick={() => {
-                    // context?.dispatch({
-                    //   type: "add",
-                    //   product: cartItem.product,
-                    // });
                     dispatch(increment(cartItem.product));
-
-                    console.log("add");
                   }}
                 ></input>
                 <input
@@ -59,11 +49,6 @@ function CartBlock() {
                   value={"Удалить"}
                   onClick={() => {
                     dispatch(deleteFromCart(cartItem.product));
-                    // context?.dispatch({
-                    //   type: "delete",
-                    //   product: cartItem.product,
-                    // });
-                    console.log("delete");
                   }}
                 ></input>
               </div>
