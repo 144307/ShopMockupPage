@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import "./Card.css";
+import "./Card.less";
 import { cartItem, product } from "../types";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { increment, decrement } from "../cartSlice";
