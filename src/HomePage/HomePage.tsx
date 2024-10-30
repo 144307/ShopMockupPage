@@ -23,7 +23,7 @@ function HomePage() {
         <ThemeButton></ThemeButton>
       </header>
       <div className="grid">
-        {Array.from(Array(70)).map((_, i) => {
+        {Array.from(Array(40)).map((_, i) => {
           return (
             <Card product={{ id: i, name: "test" + i, price: i ** 2 }}></Card>
           );

@@ -1,60 +1,46 @@
-.card {
-  /* max-width: 200px; */
+@import "../variables.less";
+
+.card_5 { // card with 5 items
   min-height: 300px;
-  padding: 0px 20px 15px;
+  padding: 0px 16px 16px;
 
-  position: relative;
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 5;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  border-radius: 10px;
-  overflow: hidden;
-  /* box-shadow: inset -1px -1px 1px rgba(0, 0, 0, 0.5),
-    inset 1px 1px 1px rgba(255, 255, 255, 0.5); */
-  /* align-items: center; */
-  /* align-items: stretch; */
-  /* outline: 2px solid red; */
-  background-color: #d9d9d9;
+  border: 1px solid #D2D2D2;
+  border-radius: 4px;
+  // overflow: hidden;
+  // background-color: @item-background;
   font-family: "Roboto Slab", sans-serif;
 }
 
-.card:before {
-  pointer-events: none;
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-
-  border-radius: 10px;
-  /* overflow: hidden; */
-  box-shadow: inset -1px -1px 1px rgba(0, 0, 0, 0.5),
-    inset 1px 1px 1px rgba(255, 255, 255, 0.5);
-  /* box-shadow: inset 0px 0px 0px 2px black;
-  -webkit-box-shadow: inset 0px 0px 0px 2px black;
-  -moz-box-shadow: inset 0px 0px 0px 2px black; */
+.card__image-wrapper {
+  margin-left: -16px;
+  width: calc(100% + 32px);
+  // border: 1px solid red;
 }
 
 .card__image {
-  margin-left: -20px;
-  width: calc(100% + 40px);
-  /* aspect-ratio: auto; */
+  width: 100%;
+  height: 100%;
 }
 
 .card__heading {
-  margin: 15px 0 0 0;
+  margin: 0;
 }
 
 .card__description {
-  margin: 8px 0 0 0;
+}
+
+.card__text {
+  margin: 0;
 }
 
 .addToCart {
-  width: 80%;
-  margin-top: 15px;
+  width: 100%;
+  // margin: 0 auto;
+  // margin-top: max(16px, auto);
   position: relative;
   align-self: center;
   color: #626262;
@@ -64,10 +50,6 @@
 
 .addToCart__quantity-controls {
   display: flex;
-  /* width: 100%; */
-  /* flex-shrink: 0; */
-  /* gap: 3px; */
-  /* outline: 1px solid blue; */
 }
 
 .addToCart__button {
@@ -75,11 +57,20 @@
   height: 100%;
   padding: 10px 30px;
   border: 0;
-  background-color: #a3a3a3;
-  color: #626262;
+  // background-color: #a3a3a3;
+  background-color: @button-color;
+  color: @text-light-color;
   font-size: 18px;
   font-weight: 600;
   font-family: "Roboto Slab", sans-serif;
+}
+
+.addToCart__button:hover {
+  background-color: @button-highlighted-color;
+}
+
+.addToCart__button:active {
+  background-color: @button-active-color;
 }
 
 .addToCart__counter {
@@ -110,16 +101,3 @@
   justify-content: center;
   align-items: center;
 }
-
-/* 
-.states {
-  position: absolute;
-  right: 0;
-  top: 0;
-  padding: 3px;
-  background-color: rgb(255, 254, 196);
-}
-
-.states__heading {
-  margin: 0;
-} */
