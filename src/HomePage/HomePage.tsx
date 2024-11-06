@@ -1,31 +1,20 @@
 import Card from "../Card/Card";
 import "./HomePage.css";
-import CartBlock from "../CartBlock/CartBlock";
-// import { clear } from "../cartSlice";
-import ThemeButton from "../ThemeButton/ThemeButton";
+import { shallowEqual, useSelector } from "react-redux";
+import Header from "../components/Header/Header";
 
 function HomePage() {
-  // const cart = useSelector((state) => state.cart.items);
+  const productData = useSelector((state) => state.productData, shallowEqual);
 
   return (
     <div className="main-page">
-      <header className="header">
-        {/* <div className="redux-cart">
-          <button
-            onClick={() => {
-              dispatch(clear());
-            }}
-          >
-            Clear
-          </button>
-        </div> */}
-        <CartBlock></CartBlock>
-        <ThemeButton></ThemeButton>
-      </header>
+      <Header></Header>
       <div className="grid">
-        {Array.from(Array(40)).map((_, i) => {
+        {productData.map((e) => {
           return (
-            <Card product={{ id: i, name: "test" + i, price: i ** 2 }}></Card>
+            <Card
+              product={{ id: e.id, name: e.product, price: e.price }}
+            ></Card>
           );
         })}
       </div>

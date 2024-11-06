@@ -16,12 +16,6 @@ function Card({ product }: Props) {
   const [amount, setAmount] = useState(0);
   const imageURL =
     "https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png";
-  const longText =
-    "Sadfsd fdfasd sffsfdfs asas dpdfsfds asqdsafgadf Sadfsd fdfasd sffsfdfs asas dpdfsfds asqdsafgadf";
-  const shortText = "Sadfsd fdfasd sffsfdfs asas dpdfsfds asqdsafgadf";
-  const random = Math.floor(Math.random() * 2);
-  const randomText = random >= 1 ? longText : shortText;
-
   // const context = useContext(CartContext);
   // const dispatch = useContext(CartDispatchContext);
 
@@ -76,20 +70,20 @@ function Card({ product }: Props) {
 
   return (
     <div
-      className="card_5"
+      className="card_4"
       id={"card" + product.id.toString()}
       key={product.id}
     >
       <div className="card__image-wrapper">
         <img className="card__image" src={imageURL} alt="image" />
       </div>
-      <h3 className="card__heading">card__heading</h3>
+      <h3 className="card__heading">{product.name}</h3>
       <div className="card__description">
         <div>{"id: " + product.id}</div>
         <div>{"name: " + product.name}</div>
         <div>{"price: " + product.price}</div>
       </div>
-      <p className="card__text">{randomText}</p>
+      {/* <p className="card__text">{randomText}</p> */}
       <div className="addToCart" ref={addToCart}>
         <button
           className="addToCart__button addToCart__button_add"
