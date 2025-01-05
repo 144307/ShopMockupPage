@@ -2,6 +2,7 @@ export interface product {
   id: number;
   name: string;
   price?: number;
+  description?: string;
 }
 
 export interface cartItem {
@@ -9,14 +10,21 @@ export interface cartItem {
   amount: number;
 }
 
-// interface character {
-//   y: number;
-//   x: number;
-//   name: string;
-// }
+export interface cartState {
+  items: cartItem[];
+}
 
-// let Hero: character = {
-//   x: 1,
-//   y: 4,
-//   name: "name",
-// };
+export interface settingsState {
+  darkMode: boolean;
+}
+
+export interface dataState {
+  data: product[];
+  dataToDisplay: product[];
+}
+
+export interface rootState {
+  cart: cartState;
+  settings: settingsState;
+  productData: dataState;
+}

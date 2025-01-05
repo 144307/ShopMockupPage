@@ -1,11 +1,11 @@
 import { useRef } from "react";
-import { cartItem } from "../types";
+import { cartItem, rootState } from "../types";
 import { increment, decrement, deleteFromCart } from "../cartSlice";
 import "./CartBlock.css";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 
 function CartBlock() {
-  const cart = useSelector((state) => state.cart, shallowEqual);
+  const cart = useSelector((state: rootState) => state.cart, shallowEqual);
   const dispatch = useDispatch();
 
   const cartContext = useRef<HTMLDivElement>(null);
