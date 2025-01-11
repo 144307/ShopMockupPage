@@ -3,12 +3,16 @@ import App from "./App.tsx";
 import { store } from "./store.ts";
 import { Provider } from "react-redux";
 // import { StrictMode } from "react";
+import { BrowserRouter } from "react-router";
+
 import "./index.css";
 
 createRoot(document.getElementById("root")!).render(
   // <StrictMode>
   <Provider store={store}>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Provider>
   // </StrictMode>
 );

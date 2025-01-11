@@ -1,10 +1,16 @@
 import { useEffect } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { setDarkMode, setLightMode } from "../settingsSlice";
+import { rootState } from "../types";
+
+// import themeButton from "./dark-theme-svgrepo-com.svg"
 import "./ThemeButton.css";
 
 function ThemeButton() {
-  const settings = useSelector((state) => state.settings, shallowEqual);
+  const settings = useSelector(
+    (state: rootState) => state.settings,
+    shallowEqual
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,7 +30,7 @@ function ThemeButton() {
     >
       <img
         className="theme-button__image"
-        src="./dark-theme-svgrepo-com.svg"
+        src="/dark-theme-svgrepo-com.svg"
       ></img>
     </button>
   );

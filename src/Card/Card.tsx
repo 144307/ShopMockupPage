@@ -1,16 +1,17 @@
 import "./Card.less";
 import { useEffect, useRef, useState } from "react";
-import { cartItem, product } from "../types";
+import { cartItem, product, rootState } from "../types";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { increment, decrement } from "../cartSlice";
+import { Link } from "react-router-dom";
 
 interface Props {
   product: product;
 }
 
 function Card({ product }: Props) {
-  console.log("render");
-  const cart = useSelector((state) => state.cart, shallowEqual);
+  // console.log("render");
+  const cart = useSelector((state: rootState) => state.cart, shallowEqual);
   const dispatch = useDispatch();
 
   const [amount, setAmount] = useState(0);
@@ -77,7 +78,10 @@ function Card({ product }: Props) {
       <div className="card__image-wrapper">
         <img className="card__image" src={imageURL} alt="image" />
       </div>
-      <h3 className="card__heading">{product.name}</h3>
+      <Link className="link" to={`/product/${product.id}`}>
+        {/* Go to Product {product.id} */}
+        <h3 className="card__heading">{product.name}</h3>
+      </Link>
       <div className="card__description">
         <div>{"id: " + product.id}</div>
         <div>{"name: " + product.name}</div>
