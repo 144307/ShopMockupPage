@@ -15,22 +15,22 @@ const dataReducer = createSlice({
   },
 });
 
-// reducer
-function filterReducer(
-  state = initialState,
-  action: { type: string; payload: string }
-) {
-  if (action.type === "data/filter") {
-    return state;
-  }
-}
+// // reducer
+// function filterReducer(
+//   state = initialState,
+//   action: { type: string; payload: string }
+// ) {
+//   if (action.type === "data/filter") {
+//     return state;
+//   }
+// }
 
-// action
-const filterData = (filterCondition: string) => {
-  return {
-    type: "data/filter",
-    payload: filterCondition,
-  };
-};
+// // action
+// const filterData = (filterCondition: string) => {
+//   return {
+//     type: "data/filter",
+//     payload: filterCondition,
+//   };
+// };
 
 export default dataReducer.reducer;

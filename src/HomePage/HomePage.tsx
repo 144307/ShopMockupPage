@@ -23,9 +23,7 @@ function HomePage() {
       <Header></Header>
       <div className="grid">
         {productData.dataToDisplay.map((e: product) => {
-          return (
-            <Card product={{ id: e.id, name: e.name, price: e.price }}></Card>
-          );
+          return <Card product={e}></Card>;
         })}
       </div>
     </div>

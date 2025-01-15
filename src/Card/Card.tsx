@@ -15,8 +15,9 @@ function Card({ product }: Props) {
   const dispatch = useDispatch();
 
   const [amount, setAmount] = useState(0);
-  const imageURL =
-    "https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png";
+  // const imageURL =
+  // ("https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png");
+  const imageURL = product.imageURL;
   // const context = useContext(CartContext);
   // const dispatch = useContext(CartDispatchContext);
 
