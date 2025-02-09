@@ -24,8 +24,13 @@ export interface dataState {
   dataToDisplay: product[];
 }
 
+export interface uiState {
+  isOverlayOpened: boolean;
+}
+
 export interface rootState {
   cart: cartState;
   settings: settingsState;
   productData: dataState;
+  ui: uiState;
 }

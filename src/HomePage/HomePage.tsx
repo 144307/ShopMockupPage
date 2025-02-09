@@ -4,6 +4,7 @@ import { shallowEqual, useSelector } from "react-redux";
 import Header from "../components/Header/Header";
 import { product, rootState } from "../types";
 import { Link } from "react-router";
+import Overlay from "../components/Overlay/Overlay";
 
 function HomePage() {
   const productData = useSelector(
@@ -26,6 +27,18 @@ function HomePage() {
           return <Card product={e}></Card>;
         })}
       </div>
+      <Overlay>
+        <div
+          style={{
+            width: "100px",
+            height: "100px",
+            backgroundColor: "white",
+            borderRadius: "8px",
+          }}
+        >
+          Overlay Item
+        </div>
+      </Overlay>
     </div>
   );
 }
