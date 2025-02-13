@@ -20,6 +20,10 @@ function Input({
     console.log(e.target.value);
   }
 
+  function checkIfPasswordsEqual() {
+    console.log();
+  }
+
   if (type === "text") {
     return (
       <div className="input">
@@ -37,39 +41,46 @@ function Input({
       </div>
     );
   } else if (type === "email") {
-    <div className="input-wrapper">
-      <label className="label">{label}</label>
-      <input
-        id={id}
-        className="input email"
-        type={type}
-        placeholder={placeholder}
-        required
-      ></input>
-    </div>;
+    return (
+      <div className="input-wrapper">
+        <label className="label">{label}</label>
+        <input
+          id={id}
+          className="input email"
+          type={type}
+          placeholder={placeholder}
+          required
+        ></input>
+      </div>
+    );
   } else if (type === "tel") {
-    console.log("test");
-    <div className="input-wrapper">
-      <label className="label">{label}</label>
-      <input
-        id={id}
-        className="input phone"
-        type={type}
-        placeholder={placeholder}
-        required
-      ></input>
-    </div>;
+    return (
+      <div className="input-wrapper">
+        <label className="label">{label}</label>
+        <input
+          id={id}
+          className="input phone"
+          type={type}
+          placeholder={placeholder}
+          required
+        ></input>
+      </div>
+    );
   } else if (type === "password") {
-    <div className="input-wrapper">
-      <label className="label">{label}</label>
-      <input
-        id={id}
-        className="input password"
-        type={type}
-        placeholder={placeholder}
-        required
-      ></input>
-    </div>;
+    return (
+      <div className="input-wrapper">
+        <label className="label">{label}</label>
+        <input
+          id={id}
+          className="input password"
+          type={type}
+          placeholder={placeholder}
+          required
+        ></input>
+      </div>
+    );
+  } else {
+    return <div>Wrong type</div>;
   }
 }
 
