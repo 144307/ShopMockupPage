@@ -3,7 +3,11 @@ import { rootState } from "../../types";
 import { useDispatch, useSelector } from "react-redux";
 import { setOverlayClosed } from "../../features/ui/uiSlice";
 
-function Overlay({ children }) {
+interface Props {
+  children: React.ReactNode;
+}
+
+function Overlay({ children }: Props) {
   const ui = useSelector((state: rootState) => state.ui);
   const dispatch = useDispatch();
 

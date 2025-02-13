@@ -9,7 +9,7 @@ function FormButton() {
     dispatch(setOverlayOpen());
   }
 
-  return <input type="button" onClick={openOverlay} value={"FormButton"} />;
+  return <input type="button" onClick={openOverlay} value={"Login"} />;
 }
 
 export default FormButton;

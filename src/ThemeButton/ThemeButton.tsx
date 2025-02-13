@@ -3,7 +3,6 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { setDarkMode, setLightMode } from "../settingsSlice";
 import { rootState } from "../types";
 
-// import themeButton from "./dark-theme-svgrepo-com.svg"
 import "./ThemeButton.css";
 
 function ThemeButton() {

@@ -5,6 +5,7 @@ import Header from "../components/Header/Header";
 import { product, rootState } from "../types";
 import { Link } from "react-router";
 import Overlay from "../components/Overlay/Overlay";
+import Form from "../components/Form/Form";
 
 function HomePage() {
   const productData = useSelector(
@@ -28,16 +29,7 @@ function HomePage() {
         })}
       </div>
       <Overlay>
-        <div
-          style={{
-            width: "100px",
-            height: "100px",
-            backgroundColor: "white",
-            borderRadius: "8px",
-          }}
-        >
-          Overlay Item
-        </div>
+        <Form></Form>
       </Overlay>
     </div>
   );
