@@ -3,30 +3,40 @@
   flex-direction: column;
 }
 
+.password-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 .label {
-  margin-bottom: 8px;
-  font-size: 20px;
-  font-weight: 500;
+  margin-bottom: 4px;
+  color: #888;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .input {
   /* padding: 8px 14px; */
-  padding: 0.75rem;
+  padding: 1rem;
+  outline: 0;
   border: 2px solid #d2d2d2;
   border-radius: 4px;
   font-size: 16px;
 }
 
+.input_correct {
+  border-color: 2px solid green;
+  background-color: #c8ffdb !important;
+}
+
+.input_error {
+  border: 2px solid #ec4646 !important;
+  background-color: rgb(255, 200, 200) !important;
+}
+
 .input:hover,
 .input:focus {
   background-color: #eee;
-}
-
-/* .input:invalid:required */
-.input:user-invalid {
-  background-color: red;
-}
-
-.input:user-valid {
-  background-color: greenyellow;
+  /* background-color: rgba(240, 240, 240, 2); */
 }

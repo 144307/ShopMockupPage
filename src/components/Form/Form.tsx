@@ -15,7 +15,7 @@ function Form() {
         label="Phone"
         type="tel"
         id="phone"
-        placeholder="Phone Number"
+        placeholder="+0 (000) 000-00-00"
       ></Input>
       <Input
         label="Password"
