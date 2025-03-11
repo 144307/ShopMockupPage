@@ -1,3 +1,4 @@
+// надо определиться с тем какие параметры и функции передовать в uu
 import { useEffect, useRef, useState } from "react";
 import "./Input.css";
 
@@ -6,6 +7,8 @@ interface Props {
   type: string;
   id: string;
   placeholder: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
+  onSubmit: (values: { username: string; password: string }) => void;
 }
 
 function Input({
@@ -13,6 +16,7 @@ function Input({
   type: type,
   id: id,
   placeholder: placeholder,
+  setValue: setValue,
 }: Props) {
   const [firstPassword, setFirstPassword] = useState("");
   const [secondPassword, setSecondPassword] = useState("");
@@ -21,34 +25,32 @@ function Input({
     checkIfPasswordsEqual(firstPassword, secondPassword);
   }, [firstPassword, secondPassword]);
 
+  const [errorLabel, setErrorLabel] = useState(false);
   const ref = useRef<HTMLInputElement>(null);
   const optionalRef = useRef<HTMLInputElement>(null);
+  const [showError, setShowError] = useState(false);
 
   function checkIfPasswordsEqual(first: string, second: string) {
     if (first !== second && first !== "" && second !== "") {
-      console.log("error");
+      console.log(first.length);
       if (ref.current && optionalRef.current) {
-        ref.current.classList.add("input_error");
-        optionalRef.current.classList.add("input_error");
-        ref.current.classList.remove("input_correct");
-        optionalRef.current.classList.remove("input_correct");
+        setShowError(true);
       } else {
         console.log("input ref is null");
       }
-    } else if (first === second && first !== "" && second !== "") {
+    } else if (
+      first === second &&
+      first !== "" &&
+      second !== "" &&
+      first.length > 8 &&
+      second.length > 8
+    ) {
       if (ref.current && optionalRef.current) {
-        ref.current.classList.remove("input_error");
-        optionalRef.current.classList.remove("input_error");
-        ref.current.classList.add("input_correct");
-        optionalRef.current.classList.add("input_correct");
+        setShowError(false);
       } else {
         console.log("input ref is null");
       }
     }
-  }
-
-  function checkInput(e: React.ChangeEvent<HTMLInputElement>) {
-    console.log(e.target.value);
   }
 
   if (type === "text") {
@@ -56,12 +58,13 @@ function Input({
       <div className="input-wrapper">
         <label className="label">{label}</label>
         <input
-          ref={ref}
           id={id}
-          className="input login"
+          className={`input login${showError ? " input_error" : ""}`}
           type={type}
           placeholder={placeholder}
-          onChange={checkInput}
+          onChange={(e) => {
+            setValue(e.currentTarget.value);
+          }}
           minLength={2}
           maxLength={10}
           required
@@ -73,9 +76,8 @@ function Input({
       <div className="input-wrapper">
         <label className="label">{label}</label>
         <input
-          ref={ref}
           id={id}
-          className="input email"
+          className={`input login${showError ? " input_error" : ""}`}
           type={type}
           placeholder={placeholder}
           required
@@ -87,9 +89,8 @@ function Input({
       <div className="input-wrapper">
         <label className="label">{label}</label>
         <input
-          ref={ref}
           id={id}
-          className="input phone"
+          className={`input login${showError ? " input_error" : ""}`}
           type={type}
           placeholder={placeholder}
           required
@@ -104,12 +105,15 @@ function Input({
           <input
             ref={ref}
             id={id}
-            className="input password"
+            className={`input login${showError ? " input_error" : ""}`}
             type={type}
             placeholder={placeholder}
             required
             onChange={(e) => setFirstPassword(e.currentTarget.value)}
           ></input>
+          <label className={`error-label ${errorLabel ? "" : "hidden"}`}>
+            Passwords must be equal
+          </label>
         </div>
         <div className="input-wrapper">
           <label className="label">Repeat Password</label>

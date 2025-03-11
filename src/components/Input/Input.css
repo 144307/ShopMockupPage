@@ -1,12 +1,16 @@
+.hidden {
+  display: none;
+}
 .input-wrapper {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .password-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 26px;
 }
 
 .label {
@@ -14,6 +18,15 @@
   color: #888;
   font-size: 18px;
   font-weight: 600;
+}
+
+.error-label {
+  bottom: -16px;
+  right: 0;
+  position: absolute;
+  color: #ec4646;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .input {
@@ -26,7 +39,7 @@
 }
 
 .input_correct {
-  border-color: 2px solid green;
+  border: 2px solid #27cf62 !important;
   background-color: #c8ffdb !important;
 }
 

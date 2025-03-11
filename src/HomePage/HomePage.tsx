@@ -16,6 +16,10 @@ function HomePage() {
 
   const testID = 2;
 
+  function onFormSubmit(values: { username: string; password: string }) {
+    console.log("username:", values.username, "password:", values.password);
+  }
+
   return (
     <div className="main-page">
       {/* <a href={"/product/" + testID}>Test Link</a> */}
@@ -29,7 +33,7 @@ function HomePage() {
         })}
       </div>
       <Overlay>
-        <Form></Form>
+        <Form mode={"signup"} onSubmit={onFormSubmit}></Form>
       </Overlay>
     </div>
   );
