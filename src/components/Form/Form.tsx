@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 // import { setOverlayClosed } from "../../features/ui/uiSlice";
 import "./Form.less";
-import { ReactElement, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 interface Props {
   mode: "signup" | "login";
