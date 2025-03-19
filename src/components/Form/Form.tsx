@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
-import { setOverlayClosed } from "../../features/ui/uiSlice";
+// import { setOverlayClosed } from "../../features/ui/uiSlice";
 import "./Form.less";
-import { useRef, useState } from "react";
+import { ReactElement, useRef, useState } from "react";
 
 interface Props {
   mode: "signup" | "login";
@@ -22,7 +22,20 @@ function Form({ mode: mode, onSubmit: onSubmit }: Props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
+  // const passwordRef = useRef<ReactElement<HTMLInputElement>>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
+  function showPassword() {
+    if (passwordRef.current) {
+      if (passwordVisible === false) {
+        setPasswordVisible(true);
+      } else {
+        setPasswordVisible(false);
+      }
+    }
+  }
 
   function validate() {
     let valid = true;
@@ -85,17 +98,27 @@ function Form({ mode: mode, onSubmit: onSubmit }: Props) {
         <label className="form__label" htmlFor="password">
           Password
         </label>
-        <input
-          className={`form__input ${
-            errors.password ? "form__input_error" : ""
-          }`}
-          id="password"
-          type="text"
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
+        <div className="form__input-wrapper_2">
+          <input
+            className={`form__input form__input_left-half ${
+              errors.password ? "form__input_error" : ""
+            }`}
+            ref={passwordRef}
+            id="password"
+            type={passwordVisible ? "text" : "password"}
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
+          <input
+            className={`form__show-password ${
+              passwordVisible === true && "form__show-password_eye-closed"
+            }`}
+            type="button"
+            onClick={showPassword}
+          />
+        </div>
         <div
           className={`form__error ${errors.password ? "form__error_show" : ""}`}
         >
@@ -112,7 +135,7 @@ function Form({ mode: mode, onSubmit: onSubmit }: Props) {
               errors.confirmPassword ? "form__input_error" : ""
             }`}
             id="confirm-password"
-            type="text"
+            type="password"
             value={confirmPassword}
             onChange={(e) => {
               setConfirmPassword(e.target.value);
