@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 // import { setOverlayClosed } from "../../features/ui/uiSlice";
 import "./Form.less";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface Props {
   mode: "signup" | "login";
@@ -18,13 +18,14 @@ function Form({ mode: mode, onSubmit: onSubmit }: Props) {
   const dispatch = useDispatch();
 
   const form = useRef<HTMLFormElement>(null);
+  const hasNumber = /\d/;
+  const hasCapitalLetter = /\p{Lu}/u;
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
-  // const passwordRef = useRef<ReactElement<HTMLInputElement>>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
   function showPassword() {
@@ -38,6 +39,7 @@ function Form({ mode: mode, onSubmit: onSubmit }: Props) {
   }
 
   function validate() {
+    console.log("- validate");
     let valid = true;
     const newErrors: Errors = {};
 
@@ -49,11 +51,24 @@ function Form({ mode: mode, onSubmit: onSubmit }: Props) {
       newErrors.password = "Password is required";
     }
     if (mode === "signup") {
+      console.log("check");
       if (!confirmPassword) {
-        newErrors.confirmPassword = "Please confirm your password";
+        newErrors.confirmPassword = "Password is required";
         valid = false;
       } else if (password !== confirmPassword) {
         newErrors.confirmPassword = "Passwords do not match";
+        newErrors.password = "Passwords do not match";
+        valid = false;
+      } else if (
+        confirmPassword.length < 8 &&
+        !hasCapitalLetter.test(confirmPassword) &&
+        !hasNumber.test(confirmPassword)
+      ) {
+        console.log("test");
+        newErrors.password =
+          "Password must be longer then 8 characters, have at lease one capital letter and one number";
+        newErrors.confirmPassword =
+          "Password must be longer then 8 characters, have at lease one capital letter and one number";
         valid = false;
       }
     }
@@ -66,7 +81,8 @@ function Form({ mode: mode, onSubmit: onSubmit }: Props) {
     console.log("handleSubmit");
     e.preventDefault();
     if (validate()) {
-      onSubmit({ username: "", password: "" });
+      onSubmit({ username: "username", password: "passwrod" });
+      setErrors({});
     }
   }
 
@@ -100,7 +116,7 @@ function Form({ mode: mode, onSubmit: onSubmit }: Props) {
         </label>
         <div className="form__input-wrapper_2">
           <input
-            className={`form__input form__input_left-half ${
+            className={`form__input form__input_left-part ${
               errors.password ? "form__input_error" : ""
             }`}
             ref={passwordRef}
@@ -112,8 +128,12 @@ function Form({ mode: mode, onSubmit: onSubmit }: Props) {
             }}
           />
           <input
-            className={`form__show-password ${
-              passwordVisible === true && "form__show-password_eye-closed"
+            className={`form__input_right-part ${
+              passwordVisible ? "form__input_right-part_eye-closed" : ""
+            } ${
+              errors.password
+                ? "form__input_right-part_error"
+                : "form__input_right-part_normal"
             }`}
             type="button"
             onClick={showPassword}
