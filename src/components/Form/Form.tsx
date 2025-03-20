@@ -1,7 +1,9 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // import { setOverlayClosed } from "../../features/ui/uiSlice";
 import "./Form.less";
 import { useEffect, useRef, useState } from "react";
+import { rootState } from "../../types";
+import { setOverlayClosed } from "../../features/ui/uiSlice";
 
 interface Props {
   mode: "signup" | "login";
@@ -15,6 +17,7 @@ interface Errors {
 }
 
 function Form({ mode: mode, onSubmit: onSubmit }: Props) {
+  const ui = useSelector((state: rootState) => state.ui);
   const dispatch = useDispatch();
 
   const form = useRef<HTMLFormElement>(null);
@@ -27,6 +30,20 @@ function Form({ mode: mode, onSubmit: onSubmit }: Props) {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
   const passwordRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (!ui.isOverlayOpened) {
+      resetForm();
+    }
+  }, [ui.isOverlayOpened]);
+
+  function resetForm() {
+    setUsername("");
+    setPassword("");
+    setConfirmPassword("");
+    setPasswordVisible(false);
+    setErrors({});
+  }
 
   function showPassword() {
     if (passwordRef.current) {
@@ -81,8 +98,8 @@ function Form({ mode: mode, onSubmit: onSubmit }: Props) {
     console.log("handleSubmit");
     e.preventDefault();
     if (validate()) {
-      onSubmit({ username: "username", password: "passwrod" });
-      setErrors({});
+      onSubmit({ username: "username", password: "password" });
+      dispatch(setOverlayClosed());
     }
   }
 
@@ -178,6 +195,7 @@ function Form({ mode: mode, onSubmit: onSubmit }: Props) {
           // dispatch(setOverlayClosed());
         }}
       />
+      <input type="button" onClick={resetForm} value={"reset form"} />
     </form>
   );
 }
