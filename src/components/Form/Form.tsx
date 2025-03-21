@@ -195,7 +195,6 @@ function Form({ mode: mode, onSubmit: onSubmit }: Props) {
           // dispatch(setOverlayClosed());
         }}
       />
-      <input type="button" onClick={resetForm} value={"reset form"} />
     </form>
   );
 }
