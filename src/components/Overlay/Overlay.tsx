@@ -27,8 +27,18 @@ function Overlay({ children }: Props) {
   }, []);
 
   return (
-    <div className={`overlay ${ui.isOverlayOpened ? "" : "overlay_hidden"}`}>
-      <div className="overlay__content-wrapper">
+    <div
+      className={`overlay ${ui.isOverlayOpened ? "" : "overlay_hidden"}`}
+      onClick={(e: React.MouseEvent<HTMLDivElement>) => {
+        console.log("clicked outside");
+      }}
+    >
+      <div
+        className="overlay__content-wrapper"
+        onClick={(e: React.MouseEvent<HTMLDivElement>) => {
+          e.stopPropagation();
+        }}
+      >
         {children}
         <input
           className="close-button"

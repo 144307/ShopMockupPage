@@ -21,12 +21,12 @@ function HomePage() {
   }
 
   return (
-    <div className="main-page">
+    <main className="main-page">
       {/* <a href={"/product/" + testID}>Test Link</a> */}
       {/* <Link to={`/product/${testID}`}>Test Link</Link> */}
-      <Link to={`/product/${testID}`}>Go to Product {testID}</Link>
       {/* <Link to="/product/2">Test Link 2</Link> */}
       <Header></Header>
+      <Link to={`/product/${testID}`}>Go to Product {testID}</Link>
       <div className="grid">
         {productData.dataToDisplay.map((e: product) => {
           return <Card product={e}></Card>;
@@ -35,7 +35,7 @@ function HomePage() {
       <Overlay>
         <Form mode={"signup"} onSubmit={onFormSubmit}></Form>
       </Overlay>
-    </div>
+    </main>
   );
 }
 
