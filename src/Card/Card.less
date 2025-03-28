@@ -1,4 +1,5 @@
 @import "../variables.less";
+@import "../library.less";
 
 .card_4 {
   // card with 4 items
@@ -13,6 +14,8 @@
   border: @border-grey;
   border-radius: @borderRadiusSmall;
   font-family: "Roboto Slab", sans-serif;
+
+  .shadow-highlight;
 }
 
 .card__image-wrapper {
@@ -61,15 +64,8 @@
 .addToCart__button {
   width: 100%;
   height: 100%;
-  padding: 10px 30px;
-  border: 2px solid #d2d2d2;
-  border-radius: 4px;
-  background-color: @light-theme__button-background;
 
-  // background-color: @button-color;
-  color: @light-theme-text-color;
-  font-size: @fontSizeMedium;
-  font-family: "Roboto Slab", sans-serif;
+  .button;
 }
 
 .addToCart__button:hover {

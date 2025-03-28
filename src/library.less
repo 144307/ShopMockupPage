@@ -1,0 +1,30 @@
+@import: "./variables.less";
+
+.button {
+  padding: 10px 30px;
+  border: 2px solid #d2d2d2;
+  border-radius: 4px;
+  background-color: @light-theme__button-background;
+  color: @light-theme-text-color;
+  font-size: @fontSizeMedium;
+  font-family: "Roboto Slab", sans-serif;
+  line-height: 100%;
+
+  &:hover {
+    background-color: @light-theme__button-background_hover;
+  }
+
+  &:active {
+    background-color: @light-theme__button-background_active;
+  }
+}
+
+.button_round {
+  .button;
+
+  border-radius: 100%;
+}
+
+.shadow-highlight {
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.14);
+}
