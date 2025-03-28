@@ -56,7 +56,6 @@ function Form({ mode: mode, onSubmit: onSubmit }: Props) {
   }
 
   function validate() {
-    console.log("- validate");
     let valid = true;
     const newErrors: Errors = {};
 
@@ -68,7 +67,6 @@ function Form({ mode: mode, onSubmit: onSubmit }: Props) {
       newErrors.password = "Password is required";
     }
     if (mode === "signup") {
-      console.log("check");
       if (!confirmPassword) {
         newErrors.confirmPassword = "Password is required";
         valid = false;
@@ -77,11 +75,10 @@ function Form({ mode: mode, onSubmit: onSubmit }: Props) {
         newErrors.password = "Passwords do not match";
         valid = false;
       } else if (
-        confirmPassword.length < 8 &&
-        !hasCapitalLetter.test(confirmPassword) &&
+        confirmPassword.length < 8 ||
+        !hasCapitalLetter.test(confirmPassword) ||
         !hasNumber.test(confirmPassword)
       ) {
-        console.log("test");
         newErrors.password =
           "Password must be longer then 8 characters, have at lease one capital letter and one number";
         newErrors.confirmPassword =
@@ -95,7 +92,6 @@ function Form({ mode: mode, onSubmit: onSubmit }: Props) {
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    console.log("handleSubmit");
     e.preventDefault();
     if (validate()) {
       onSubmit({ username: "username", password: "password" });
