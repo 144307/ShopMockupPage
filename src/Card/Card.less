@@ -7,6 +7,9 @@
   grid-template-rows: subgrid;
   grid-row: span 4;
 
+  overflow: hidden;
+  background-color: @light-theme-background;
+
   border: @border-grey;
   border-radius: @borderRadiusSmall;
   font-family: "Roboto Slab", sans-serif;
@@ -59,20 +62,22 @@
   width: 100%;
   height: 100%;
   padding: 10px 30px;
-  border: 0;
-  // background-color: #a3a3a3;
-  background-color: @button-color;
-  color: @text-light-color;
+  border: 2px solid #d2d2d2;
+  border-radius: 4px;
+  background-color: @light-theme__button-background;
+
+  // background-color: @button-color;
+  color: @light-theme-text-color;
   font-size: @fontSizeMedium;
   font-family: "Roboto Slab", sans-serif;
 }
 
 .addToCart__button:hover {
-  background-color: @button-highlighted-color;
+  background-color: @light-theme__button-background_hover;
 }
 
 .addToCart__button:active {
-  background-color: @button-active-color;
+  background-color: @light-theme__button-background_active;
 }
 
 .addToCart__counter {

@@ -1,3 +1,4 @@
+import "./FormButton.less";
 import { setOverlayOpen } from "../../features/ui/uiSlice";
 import { useDispatch } from "react-redux";
 
@@ -9,7 +10,14 @@ function FormButton() {
     dispatch(setOverlayOpen());
   }
 
-  return <input type="button" onClick={openOverlay} value={"Login"} />;
+  return (
+    <input
+      className="form-button"
+      type="button"
+      onClick={openOverlay}
+      value={"Login"}
+    />
+  );
 }
 
 export default FormButton;
