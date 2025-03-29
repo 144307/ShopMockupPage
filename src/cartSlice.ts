@@ -1,14 +1,24 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { cartState, product } from "./types";
+import { createSlice } from "@reduxjs/toolkit";
+import { cartState } from "./types";
 
 const initialState = {
   items: [
     {
-      product: { id: 1, name: "Product 1", price: 100 },
+      product: {
+        id: 1,
+        name: "Product 1",
+        price: "100",
+        imageURL: "placeholder",
+      },
       amount: 2,
     },
     {
-      product: { id: 2, name: "Product 2", price: 200 },
+      product: {
+        id: 2,
+        name: "Product 2",
+        price: "200",
+        imageURL: "placeholder",
+      },
       amount: 1,
     },
   ],
@@ -18,14 +28,19 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    increment: (state, action: PayloadAction<product>) => {
+    increment: (state, action) => {
       const index = state.items.findIndex(
         (e) => e.product.id === action.payload.id
       );
       if (index != -1) {
         state.items[index].amount++;
       } else {
-        state.items.push({ product: action.payload, amount: 1 });
+        // state.items.push({ product: action.payload, amount: 1 });
+        return {
+          ...state,
+          items: [...state.items, { product: action.payload, amount: 1 }],
+        };
+        // state.items = { product: action.payload, amount: 1 };
       }
     },
     decrement: (state, action) => {
