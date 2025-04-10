@@ -1,9 +1,8 @@
 import { useEffect } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { setDarkMode, setLightMode } from "../settingsSlice";
-import { rootState } from "../types";
-
+import { setDarkMode, setLightMode } from "../../settingsSlice.ts";
 import "./ThemeButton.css";
+import { rootState } from "../../types";
 
 function ThemeButton() {
   const settings = useSelector(

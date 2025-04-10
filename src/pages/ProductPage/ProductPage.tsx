@@ -1,6 +1,6 @@
+import Header from "../../components/Header/Header";
+import { product, rootState } from "../../types";
 import { useParams } from "react-router";
-import Header from "../components/Header/Header";
-import { product, rootState } from "../types";
 import { useSelector } from "react-redux";
 
 function ProductPage() {

@@ -1,6 +1,6 @@
 import "./Header.less";
-import CartBlock from "../../CartBlock/CartBlock";
-import ThemeButton from "../../ThemeButton/ThemeButton";
+import CartBlock from "../../components/CartBlock/CartBlock.tsx";
+import ThemeButton from "../ThemeButton/ThemeButton.tsx";
 import FormButton from "../FormButton/FormButton";
 
 function Header() {

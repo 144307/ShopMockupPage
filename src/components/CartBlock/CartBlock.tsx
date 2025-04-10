@@ -1,6 +1,6 @@
 import { useRef } from "react";
-import { cartItem, rootState } from "../types";
-import { increment, decrement, deleteFromCart } from "../cartSlice";
+import { cartItem, rootState } from "../../types.ts";
+import { increment, decrement, deleteFromCart } from "./cartSlice.ts";
 import "./CartBlock.css";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 
