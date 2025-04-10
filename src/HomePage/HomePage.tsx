@@ -12,7 +12,7 @@ function HomePage() {
     (state: rootState) => state.productData,
     shallowEqual
   );
-  console.log("test", productData);
+  // console.log("test", productData);
 
   const testID = 2;
 
@@ -28,8 +28,8 @@ function HomePage() {
       <Header></Header>
       <Link to={`/product/${testID}`}>Go to Product {testID}</Link>
       <div className="grid">
-        {productData.dataToDisplay.map((e: product) => {
-          return <Card product={e}></Card>;
+        {productData.dataToDisplay.map((e: product, i) => {
+          return <Card product={e} key={i}></Card>;
         })}
       </div>
       <Overlay>
