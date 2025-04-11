@@ -2,7 +2,7 @@ import "./HomePage.css";
 import { shallowEqual, useSelector } from "react-redux";
 import { Link } from "react-router";
 import { product, rootState } from "../../types";
-import Card from "../../Card/Card";
+import Card from "../../components/Card/Card";
 import Header from "../../components/Header/Header";
 import Overlay from "../../components/Overlay/Overlay";
 import Form from "../../components/Form/Form";
