@@ -26,6 +26,7 @@ export interface dataState {
 
 export interface uiState {
   isOverlayOpened: boolean;
+  isCartOpened: boolean;
 }
 
 export interface rootState {

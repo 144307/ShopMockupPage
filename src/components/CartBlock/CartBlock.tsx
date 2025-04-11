@@ -1,23 +1,30 @@
+import "./CartBlock.css";
 import { useRef } from "react";
 import { cartItem, rootState } from "../../types.ts";
 import { increment, decrement, deleteFromCart } from "./cartSlice.ts";
-import "./CartBlock.css";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setCartClose, setCartOpen } from "../../features/ui/uiSlice.ts";
 
 function CartBlock() {
-  const cart = useSelector((state: rootState) => state.cart, shallowEqual);
+  const cart = useSelector((state: rootState) => state.cart);
+  const cartDisplayState = useSelector(
+    (state: rootState) => state.ui.isCartOpened
+  );
   const dispatch = useDispatch();
 
   const cartContext = useRef<HTMLDivElement>(null);
 
   function toggleCart() {
-    if (
-      cartContext.current &&
-      cartContext.current.style.visibility === "hidden"
-    ) {
-      cartContext.current.style.visibility = "visible";
-    } else if (cartContext.current) {
-      cartContext.current.style.visibility = "hidden";
+    if (cartDisplayState) {
+      dispatch(setCartClose());
+    } else {
+      dispatch(setCartOpen());
+      console.log("toggleCart");
+      if (cartDisplayState) {
+        dispatch(setCartClose());
+      } else {
+        dispatch(setCartOpen());
+      }
     }
   }
 
@@ -65,10 +72,36 @@ function CartBlock() {
         Корзина
       </button>
       <div>{"Количество товаров в корзине: " + cart.items.length}</div>
-      {/* <div>{cartContent()}</div> */}
-      <div className="cart__content" ref={cartContext}>
-        {cart.items.length ? cartContent() : <div>No items</div>}
-      </div>
+      {cartDisplayState ? (
+        <div className="cart__content" ref={cartContext}>
+          {cart.items.length ? (
+            cartContent() ? (
+              cartContent()
+            ) : (
+              <div>No items</div>
+            )
+          ) : (
+            "hidden"
+          )}
+        </div>
+      ) : (
+        ""
+      )}
+      {cartDisplayState ? (
+        <div className="cart__content" ref={cartContext}>
+          {cart.items.length ? (
+            cartContent() ? (
+              cartContent()
+            ) : (
+              <div>No items</div>
+            )
+          ) : (
+            "hidden"
+          )}
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }
