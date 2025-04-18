@@ -6,11 +6,16 @@ import Card from "../../components/Card/Card";
 import Header from "../../components/Header/Header";
 import Overlay from "../../components/Overlay/Overlay";
 import Form from "../../components/Form/Form";
+import { createPortal } from "react-dom";
 
 function HomePage() {
+  const root = document.getElementById("root")!;
   const productData = useSelector(
     (state: rootState) => state.productData,
     shallowEqual
+  );
+  const overlayOpened = useSelector(
+    (state: rootState) => state.ui.isOverlayOpened
   );
   // console.log("test", productData);
 
@@ -32,9 +37,14 @@ function HomePage() {
           return <Card product={e} key={i}></Card>;
         })}
       </div>
-      <Overlay>
-        <Form mode={"signup"} onSubmit={onFormSubmit}></Form>
-      </Overlay>
+
+      {overlayOpened &&
+        createPortal(
+          <Overlay>
+            <Form mode={"signup"} onSubmit={onFormSubmit}></Form>
+          </Overlay>,
+          root
+        )}
     </main>
   );
 }

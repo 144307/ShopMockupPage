@@ -1,25 +1,39 @@
-import "./CartBlock.css";
-import { useRef } from "react";
+import "./CartBlock.less";
+import minusImage from "../../assets/minus.svg";
+import plusImage from "../../assets/plus.svg";
+import { useRef, useState } from "react";
 import { cartItem, rootState } from "../../types.ts";
 import { increment, decrement, deleteFromCart } from "./cartSlice.ts";
 import { useDispatch, useSelector } from "react-redux";
 import { setCartClose, setCartOpen } from "../../features/ui/uiSlice.ts";
+import { createPortal } from "react-dom";
 
 function CartBlock() {
+  const root = document.getElementById("root")!;
   const cart = useSelector((state: rootState) => state.cart);
   const cartDisplayState = useSelector(
     (state: rootState) => state.ui.isCartOpened
   );
   const dispatch = useDispatch();
-
-  const cartContext = useRef<HTMLDivElement>(null);
+  // const cartContext = useRef<HTMLDivElement>(null);
+  const cartButtonRef = useRef<HTMLButtonElement>(null);
+  const [pos, setPos] = useState<{ left: number; top: number }>({
+    left: 0,
+    top: 0,
+  });
 
   function toggleCart() {
+    if (cartButtonRef.current?.getBoundingClientRect()) {
+      setPos({
+        left: cartButtonRef.current?.getBoundingClientRect().left,
+        top: cartButtonRef.current?.getBoundingClientRect().bottom + 8,
+      });
+      console.log(pos);
+    }
     if (cartDisplayState) {
       dispatch(setCartClose());
     } else {
       dispatch(setCartOpen());
-      console.log("toggleCart");
       if (cartDisplayState) {
         dispatch(setCartClose());
       } else {
@@ -33,31 +47,42 @@ function CartBlock() {
       <>
         {cart.items.map((cartItem: cartItem) => {
           return (
-            <div key={"cartItem" + cartItem.product.id} className="cart-item">
-              <p>{"Название: " + cartItem.product.name}</p>
-              <div>{"Количество: " + cartItem.amount}</div>
-              <div className="cart-item__menu">
-                <input
-                  type="button"
-                  value={"-"}
-                  onClick={() => {
-                    dispatch(decrement(cartItem.product));
-                  }}
-                ></input>
-                <input
-                  type="button"
-                  value={"+"}
-                  onClick={() => {
-                    dispatch(increment(cartItem.product));
-                  }}
-                ></input>
-                <input
-                  type="button"
-                  value={"Удалить"}
-                  onClick={() => {
-                    dispatch(deleteFromCart(cartItem.product));
-                  }}
-                ></input>
+            <div className="cart-item" key={"cartItem" + cartItem.product.id}>
+              <img
+                className="cart-item-image"
+                src={cartItem.product.imageURL}
+                alt={cartItem.product.name}
+              />
+              <div className="cart-item-info">
+                <p className="cart-item-title">{cartItem.product.name}</p>
+                <div className="cart-item-price">{cartItem.product.price}</div>
+                <div className="cart-counter">
+                  <button
+                    className="button-small-square"
+                    onClick={() => {
+                      dispatch(decrement(cartItem.product));
+                    }}
+                  >
+                    <img className="button-internal-image" src={minusImage} />
+                  </button>
+                  <div className="text-square-container">{cartItem.amount}</div>
+                  <button
+                    className="button-small-square"
+                    onClick={() => {
+                      dispatch(increment(cartItem.product));
+                    }}
+                  >
+                    <img className="button-internal-image" src={plusImage} />
+                  </button>
+                  <button
+                    className="button-small"
+                    onClick={() => {
+                      dispatch(deleteFromCart(cartItem.product));
+                    }}
+                  >
+                    Удалить
+                  </button>
+                </div>
               </div>
             </div>
           );
@@ -67,41 +92,26 @@ function CartBlock() {
   };
 
   return (
-    <div>
-      <button className="cart__button" onClick={toggleCart}>
+    <div className="cart">
+      <button
+        className="cart__button button"
+        ref={cartButtonRef}
+        onClick={toggleCart}
+      >
         Корзина
       </button>
-      <div>{"Количество товаров в корзине: " + cart.items.length}</div>
-      {cartDisplayState ? (
-        <div className="cart__content" ref={cartContext}>
-          {cart.items.length ? (
-            cartContent() ? (
-              cartContent()
-            ) : (
-              <div>No items</div>
-            )
-          ) : (
-            "hidden"
-          )}
-        </div>
-      ) : (
-        ""
-      )}
-      {cartDisplayState ? (
-        <div className="cart__content" ref={cartContext}>
-          {cart.items.length ? (
-            cartContent() ? (
-              cartContent()
-            ) : (
-              <div>No items</div>
-            )
-          ) : (
-            "hidden"
-          )}
-        </div>
-      ) : (
-        ""
-      )}
+      {cartDisplayState &&
+        createPortal(
+          <div
+            className="cart-popup"
+            style={{ left: `${pos.left}px`, top: `${pos.top}px` }}
+            // ref={cartContext}
+          >
+            <div>{"Количество товаров в корзине: " + cart.items.length}</div>
+            {cart.items.length ? cartContent() : <div>No items</div>}
+          </div>,
+          root
+        )}
     </div>
   );
 }
