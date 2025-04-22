@@ -7,6 +7,7 @@ import { increment, decrement, deleteFromCart } from "./cartSlice.ts";
 import { useDispatch, useSelector } from "react-redux";
 import { setCartClose, setCartOpen } from "../../features/ui/uiSlice.ts";
 import { createPortal } from "react-dom";
+import Popup from "../Popup/Popup.tsx";
 
 function CartBlock() {
   const root = document.getElementById("root")!;
@@ -15,7 +16,6 @@ function CartBlock() {
     (state: rootState) => state.ui.isCartOpened
   );
   const dispatch = useDispatch();
-  // const cartContext = useRef<HTMLDivElement>(null);
   const cartButtonRef = useRef<HTMLButtonElement>(null);
   const [pos, setPos] = useState<{ left: number; top: number }>({
     left: 0,
@@ -28,17 +28,11 @@ function CartBlock() {
         left: cartButtonRef.current?.getBoundingClientRect().left,
         top: cartButtonRef.current?.getBoundingClientRect().bottom + 8,
       });
-      console.log(pos);
     }
     if (cartDisplayState) {
       dispatch(setCartClose());
     } else {
       dispatch(setCartOpen());
-      if (cartDisplayState) {
-        dispatch(setCartClose());
-      } else {
-        dispatch(setCartOpen());
-      }
     }
   }
 
@@ -47,7 +41,13 @@ function CartBlock() {
       <>
         {cart.items.map((cartItem: cartItem) => {
           return (
-            <div className="cart-item" key={"cartItem" + cartItem.product.id}>
+            <div
+              className="cart-item"
+              key={"cartItem" + cartItem.product.id}
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
               <img
                 className="cart-item-image"
                 src={cartItem.product.imageURL}
@@ -102,14 +102,10 @@ function CartBlock() {
       </button>
       {cartDisplayState &&
         createPortal(
-          <div
-            className="cart-popup"
-            style={{ left: `${pos.left}px`, top: `${pos.top}px` }}
-            // ref={cartContext}
-          >
+          <Popup x={pos.left} y={pos.top}>
             <div>{"Количество товаров в корзине: " + cart.items.length}</div>
             {cart.items.length ? cartContent() : <div>No items</div>}
-          </div>,
+          </Popup>,
           root
         )}
     </div>
