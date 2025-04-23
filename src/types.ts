@@ -6,8 +6,12 @@ export interface product {
   imageURL: string;
 }
 
-export interface cartItem {
-  product: product;
+// export interface cartItem {
+//   product: product;
+//   amount: number;
+// }
+
+export interface cartItem extends product {
   amount: number;
 }
 

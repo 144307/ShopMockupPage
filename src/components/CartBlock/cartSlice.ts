@@ -4,21 +4,17 @@ import { cartItem, cartState } from "../../types";
 const initialState = {
   items: [
     {
-      product: {
-        id: 1,
-        name: "Product 1",
-        price: "100",
-        imageURL: "placeholder",
-      },
+      id: 1,
+      name: "Product 1",
+      price: "100",
+      imageURL: "placeholder",
       amount: 2,
     },
     {
-      product: {
-        id: 2,
-        name: "Product 2",
-        price: "200",
-        imageURL: "placeholder",
-      },
+      id: 2,
+      name: "Product 2",
+      price: "200",
+      imageURL: "placeholder",
       amount: 1,
     },
   ],
@@ -30,22 +26,20 @@ const cartSlice = createSlice({
   reducers: {
     increment: (state, action) => {
       const index = state.items.findIndex(
-        (e: cartItem) => e.product.id === action.payload.id
+        (e: cartItem) => e.id === action.payload.id
       );
       if (index != -1) {
         state.items[index].amount++;
       } else {
-        // state.items.push({ product: action.payload, amount: 1 });
         return {
           ...state,
-          items: [...state.items, { product: action.payload, amount: 1 }],
+          items: [...state.items, { ...action.payload, amount: 1 }],
         };
-        // state.items = { product: action.payload, amount: 1 };
       }
     },
     decrement: (state, action) => {
       const index = state.items.findIndex(
-        (e: cartItem) => e.product.id === action.payload.id
+        (e: cartItem) => e.id === action.payload.id
       );
       if (state.items[index].amount > 1) {
         state.items[index].amount--;
@@ -55,7 +49,7 @@ const cartSlice = createSlice({
     },
     deleteFromCart: (state, action) => {
       const index = state.items.findIndex(
-        (e: cartItem) => e.product.id === action.payload.id
+        (e: cartItem) => e.id === action.payload.id
       );
       if (index != -1) {
         state.items.splice(index, 1);

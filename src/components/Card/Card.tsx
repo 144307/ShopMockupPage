@@ -40,7 +40,7 @@ function Card({ product }: Props) {
     //   (e) => e.product.id === product.id
     // );
     const foundItemInCart = cart.items.find(
-      (e: cartItem) => e.product.id === product.id
+      (e: cartItem) => e.id === product.id
     );
     if (foundItemInCart) {
       setAmount(foundItemInCart.amount);

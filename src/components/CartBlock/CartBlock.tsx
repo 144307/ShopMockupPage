@@ -43,24 +43,24 @@ function CartBlock() {
           return (
             <div
               className="cart-item"
-              key={"cartItem" + cartItem.product.id}
+              key={"cartItem" + cartItem.id}
               onClick={(e) => {
                 e.stopPropagation();
               }}
             >
               <img
                 className="cart-item-image"
-                src={cartItem.product.imageURL}
-                alt={cartItem.product.name}
+                src={cartItem.imageURL}
+                alt={cartItem.name}
               />
               <div className="cart-item-info">
-                <p className="cart-item-title">{cartItem.product.name}</p>
-                <div className="cart-item-price">{cartItem.product.price}</div>
+                <p className="cart-item-title">{cartItem.name}</p>
+                <div className="cart-item-price">{cartItem.price}</div>
                 <div className="cart-counter">
                   <button
                     className="button-small-square"
                     onClick={() => {
-                      dispatch(decrement(cartItem.product));
+                      dispatch(decrement(cartItem));
                     }}
                   >
                     <img className="button-internal-image" src={minusImage} />
@@ -69,7 +69,7 @@ function CartBlock() {
                   <button
                     className="button-small-square"
                     onClick={() => {
-                      dispatch(increment(cartItem.product));
+                      dispatch(increment(cartItem));
                     }}
                   >
                     <img className="button-internal-image" src={plusImage} />
@@ -77,7 +77,7 @@ function CartBlock() {
                   <button
                     className="button-small"
                     onClick={() => {
-                      dispatch(deleteFromCart(cartItem.product));
+                      dispatch(deleteFromCart(cartItem));
                     }}
                   >
                     Удалить
