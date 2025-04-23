@@ -1,11 +1,13 @@
-import { RefObject, useEffect, useRef } from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
 
 function useClickOutside(ref: RefObject<HTMLElement>, callback: () => void) {
   const firstRenderRef = useRef(true);
+  const [firstRender, setFirstRender] = useState(true);
 
   useEffect(() => {
-    if (firstRenderRef) {
+    if (firstRender) {
       firstRenderRef.current = false;
+      setFirstRender(false);
       return;
     }
 
@@ -20,7 +22,7 @@ function useClickOutside(ref: RefObject<HTMLElement>, callback: () => void) {
     return () => {
       document.removeEventListener("click", handleClick);
     };
-  }, [ref, callback]);
+  }, [ref, callback, firstRender]);
 }
 
 export default useClickOutside;
