@@ -2,7 +2,7 @@ import "./Card.less";
 import { useEffect, useRef, useState } from "react";
 import { cartItem, product, rootState } from "../../types.ts";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { increment, decrement } from "../CartBlock/cartSlice";
+import { increment, decrement } from "../Cart/cartSlice.ts";
 import { Link } from "react-router-dom";
 
 interface Props {

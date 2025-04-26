@@ -1,4 +1,4 @@
-import "./CartBlock.less";
+import "./Cart.less";
 import minusImage from "../../assets/minus.svg";
 import plusImage from "../../assets/plus.svg";
 import { useRef, useState } from "react";
@@ -9,7 +9,7 @@ import { setCartClose, setCartOpen } from "../../features/ui/uiSlice.ts";
 import { createPortal } from "react-dom";
 import Popup from "../Popup/Popup.tsx";
 
-function CartBlock() {
+function Cart() {
   const root = document.getElementById("root")!;
   const cart = useSelector((state: rootState) => state.cart);
   const cartDisplayState = useSelector(
@@ -125,4 +125,4 @@ function CartBlock() {
   );
 }
 
-export default CartBlock;
+export default Cart;

@@ -1,12 +1,12 @@
 import "./Header.less";
-import CartBlock from "../../components/CartBlock/CartBlock.tsx";
+import Cart from "../Cart/Cart.tsx";
 import ThemeButton from "../ThemeButton/ThemeButton.tsx";
 import FormButton from "../FormButton/FormButton";
 
 function Header() {
   return (
     <header className="header">
-      <CartBlock></CartBlock>
+      <Cart></Cart>
       <ThemeButton></ThemeButton>
       <FormButton></FormButton>
     </header>
