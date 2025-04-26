@@ -103,7 +103,20 @@ function CartBlock() {
       {cartDisplayState &&
         createPortal(
           <Popup x={pos.left} y={pos.top}>
-            <div>{"Количество товаров в корзине: " + cart.items.length}</div>
+            <div>
+              {"Количество товаров в корзине: " +
+                cart.items.reduce((acc, e) => (acc += e.amount), 0)}
+            </div>
+            <div>
+              {"Стоимость товаров в корзине: " +
+                cart.items
+                  .reduce(
+                    (acc, e) =>
+                      (acc += Number(e.price?.split("$")[1]) * e.amount),
+                    0
+                  )
+                  .toFixed(2)}
+            </div>
             {cart.items.length ? cartContent() : <div>No items</div>}
           </Popup>,
           root
