@@ -24,6 +24,10 @@ function Overlay({ children }: Props) {
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "unset";
+    };
   }, []);
 
   return (
