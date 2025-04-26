@@ -107,6 +107,7 @@ function Form({ mode: mode, onSubmit: onSubmit }: Props) {
           Username
         </label>
         <input
+          autoFocus
           className={`form__input ${
             errors.username ? "form__input_error" : ""
           }`}
