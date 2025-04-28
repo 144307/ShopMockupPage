@@ -74,16 +74,11 @@ function Card({ product }: Props) {
       <div className="card__image-wrapper">
         <img className="card__image" src={imageURL} alt="image" />
       </div>
-      <Link className="link" to={`/product/${product.id}`}>
+      <Link className="card__link" to={`/product/${product.id}`}>
         {/* Go to Product {product.id} */}
         <h3 className="card__heading">{product.name}</h3>
       </Link>
-      <div className="card__description">
-        <div>{"id: " + product.id}</div>
-        <div>{"name: " + product.name}</div>
-        <div>{"price: " + product.price}</div>
-      </div>
-      {/* <p className="card__text">{randomText}</p> */}
+      <div className="card__price">{product.price}</div>
       <div className="addToCart" ref={addToCart}>
         <button
           className="addToCart__button addToCart__button_add"
