@@ -7,6 +7,7 @@ import Header from "../../components/Header/Header";
 import Overlay from "../../components/Overlay/Overlay";
 import Form from "../../components/Form/Form";
 import { createPortal } from "react-dom";
+import Ribbon from "../../components/Ribbon/Ribbon";
 
 function HomePage() {
   const root = document.getElementById("root")!;
@@ -31,6 +32,7 @@ function HomePage() {
       {/* <Link to={`/product/${testID}`}>Test Link</Link> */}
       {/* <Link to="/product/2">Test Link 2</Link> */}
       <Header></Header>
+      <Ribbon></Ribbon>
       <Link to={`/product/${testID}`}>Go to Product {testID}</Link>
       <div className="grid">
         {productData.dataToDisplay.map((e: product, i) => {
