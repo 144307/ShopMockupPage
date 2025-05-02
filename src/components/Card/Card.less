@@ -69,14 +69,16 @@
   color: #fff;
   background-color: #0078d4;
   border: 0;
-}
 
-.addToCart__button:hover {
-  background-color: @light-theme__button-background_hover;
-}
+  &:hover {
+    // background-color: red;
+    background-color: @button-highlighted-color;
+  }
 
-.addToCart__button:active {
-  background-color: @light-theme__button-background_active;
+  &:active {
+    background-color: @button-active-color;
+    // background-color: greenyellow;
+  }
 }
 
 .addToCart__counter {
