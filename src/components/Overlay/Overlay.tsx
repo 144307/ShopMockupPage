@@ -1,8 +1,8 @@
-import "./overlay.less";
+import "./Overlay.less";
 import { rootState } from "../../types";
 import { useDispatch, useSelector } from "react-redux";
 import { setOverlayClosed } from "../../features/ui/uiSlice";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 interface Props {
   children: React.ReactNode;
@@ -16,11 +16,11 @@ function Overlay({ children }: Props) {
     dispatch(setOverlayClosed());
   }
 
-  function handleKeyDown(e: KeyboardEvent) {
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
     if (e.key === "Escape") {
       closeOverlay();
     }
-  }
+  }, []);
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
@@ -28,7 +28,7 @@ function Overlay({ children }: Props) {
     return () => {
       document.body.style.overflow = "unset";
     };
-  }, []);
+  }, [handleKeyDown]);
 
   return (
     <div
