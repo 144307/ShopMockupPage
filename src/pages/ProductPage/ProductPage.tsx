@@ -14,9 +14,9 @@ function ProductPage() {
 
   return (
     <div>
+      <Header></Header>
       <h1>Product Page</h1>
       <div>{productData.data.find((e: product) => e.id === productID)?.id}</div>
-      <Header></Header>
     </div>
   );
 }

@@ -1,13 +1,11 @@
 import "./HomePage.css";
 import { shallowEqual, useSelector } from "react-redux";
-import { Link } from "react-router";
 import { product, rootState } from "../../types";
 import Card from "../../components/Card/Card";
 import Header from "../../components/Header/Header";
 import Overlay from "../../components/Overlay/Overlay";
 import Form from "../../components/Form/Form";
 import { createPortal } from "react-dom";
-import Ribbon from "../../components/Ribbon/Ribbon";
 
 function HomePage() {
   const root = document.getElementById("root")!;
@@ -18,9 +16,6 @@ function HomePage() {
   const overlayOpened = useSelector(
     (state: rootState) => state.ui.isOverlayOpened
   );
-  // console.log("test", productData);
-
-  const testID = 2;
 
   function onFormSubmit(values: { username: string; password: string }) {
     console.log("username:", values.username, "password:", values.password);
@@ -32,8 +27,6 @@ function HomePage() {
       {/* <Link to={`/product/${testID}`}>Test Link</Link> */}
       {/* <Link to="/product/2">Test Link 2</Link> */}
       <Header></Header>
-      <Ribbon></Ribbon>
-      <Link to={`/product/${testID}`}>Go to Product {testID}</Link>
       <div className="grid">
         {productData.dataToDisplay.map((e: product, i) => {
           return <Card product={e} key={i}></Card>;
