@@ -1,0 +1,121 @@
+@import "../../styles/variables.less";
+
+.form {
+  width: 400px;
+  padding: 32px;
+  box-sizing: border-box;
+  background-color: white;
+  border-radius: 8px;
+  font-family: Inter, sans-serif;
+}
+
+.form__heading {
+  margin: 0;
+  padding-bottom: 32px;
+  font-size: 36px;
+  line-height: 100%;
+}
+
+.form__label {
+  font-size: 24px;
+  padding-bottom: 8px;
+}
+
+.form__input {
+  // margin-top: 8px;
+  // width: auto;
+  display: block;
+  box-sizing: border-box;
+  padding: @input-padding;
+  outline: 0;
+  border: 2px solid #d2d2d2;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.form__input_error {
+  background-color: #ffc8c8;
+  border-color: #ec4646;
+}
+
+.form__input_left-part {
+  // width: calc(100% - 40px);
+  flex: 1;
+  border-right: 0;
+  border-radius: 4px 0 0 4px;
+}
+
+.form__input_right-part {
+  width: 50px;
+  border-radius: 0 4px 4px 0;
+  background-image: url("./eye-open.svg");
+  background-size: 40px 40px;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-left: 0;
+  border-top: 2px solid;
+  border-right: 2px solid;
+  border-bottom: 2px solid;
+}
+
+.form__input_right-part_normal {
+  border-color: #d2d2d2;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.form__input_right-part_error {
+  background-color: #ffc8c8;
+  border-color: #ec4646;
+}
+
+.form__input_right-part_eye-closed {
+  background-image: url("./eye-closed.svg");
+}
+
+.form__show-password:hover {
+  background-color: rgba(256, 256, 256, 0.6);
+  background-blend-mode: lighten;
+}
+
+.form__error {
+  visibility: hidden;
+  padding-top: 4px;
+  color: #ec4646;
+  font-weight: bold;
+}
+
+.form__error-line {
+  line-height: 130%;
+}
+
+.form__error_show {
+  visibility: visible;
+}
+
+.form__input-wrapper {
+  padding-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form__input-wrapper_2 {
+  display: flex;
+  // outline: 1px solid red;
+}
+
+.form_submit {
+  // margin-top: 48px;
+  margin-left: auto;
+  padding: 0.75rem 2rem;
+  display: block;
+  color: white;
+  background-color: #0078d4;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.form_submit:hover {
+  background-color: #4755d5;
+}

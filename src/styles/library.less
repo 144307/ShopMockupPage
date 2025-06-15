@@ -1,0 +1,60 @@
+@import: "./variables.less";
+
+.button {
+  padding: 10px 30px;
+  border: 2px solid #d2d2d2;
+  border-radius: 4px;
+  background-color: @light-theme__button-background;
+  color: @light-theme-text-color;
+  font-size: @fontSizeMedium;
+  font-family: Inter, sans-serif;
+  line-height: 100%;
+
+  &:hover {
+    background-color: @light-theme__button-background_hover;
+  }
+
+  &:active {
+    background-color: @light-theme__button-background_active;
+  }
+}
+
+.button-small {
+  .button;
+  padding: 4px;
+  height: 30px;
+}
+
+.button-small-square {
+  .button-small;
+  aspect-ratio: 1/1;
+}
+
+.button-internal-image {
+  max-width: 100%;
+}
+
+.text-square-container {
+  height: 100%;
+  aspect-ratio: 1/1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
+
+.card-light {
+  padding: @indent-medium;
+  border-radius: 4px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.14);
+}
+
+.button_round {
+  .button;
+
+  border-radius: 100%;
+}
+
+.shadow-highlight {
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.14);
+}
