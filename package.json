@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build --base=/ShopMockupPage",
+    "build": "tsc -b && vite build --base=/ShopMockupPage/",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -31,6 +31,5 @@
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1"
-  },
-  "homepage": "https://github.com/144307/ShopMockupPage"
+  }
 }

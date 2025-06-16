@@ -11,7 +11,7 @@ import "./styles/index.css";
 createRoot(document.getElementById("root")!).render(
   // <StrictMode>
   <Provider store={store}>
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <App />
     </BrowserRouter>
   </Provider>
