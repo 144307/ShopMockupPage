@@ -2,4 +2,4 @@
 
 Мокап страницы магазина с интерактивной корзиной и формой авторизации.
 
-URL: 144307.github.io/ShopMockupPage
+URL: https://144307.github.io/ShopMockupPage
