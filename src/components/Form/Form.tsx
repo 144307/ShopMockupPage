@@ -123,7 +123,7 @@ function Form({ mode: mode, onSubmit: onSubmit }: Props) {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (validate()) {
-      onSubmit({ username: "username", password: "password" });
+      onSubmit({ username: username, password: password });
       dispatch(setOverlayClosed());
     }
   }
@@ -220,7 +220,7 @@ function Form({ mode: mode, onSubmit: onSubmit }: Props) {
             }`}
           >
             <ol>
-              {errors.password.map((e, i) => (
+              {errors.confirmPassword.map((e, i) => (
                 <li className="form__error-line" key={i}>
                   {e}
                 </li>
