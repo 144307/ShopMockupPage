@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { cartItem, cartState } from "../../types";
+import { CartItem, CartState } from "../../types";
 
 const initialState = {
   items: [],
-} as cartState;
+} as CartState;
 
 const cartSlice = createSlice({
   name: "cart",
@@ -11,7 +11,7 @@ const cartSlice = createSlice({
   reducers: {
     increment: (state, action) => {
       const index = state.items.findIndex(
-        (e: cartItem) => e.id === action.payload.id
+        (e: CartItem) => e.id === action.payload.id
       );
       if (index != -1) {
         state.items[index].amount++;
@@ -24,7 +24,7 @@ const cartSlice = createSlice({
     },
     decrement: (state, action) => {
       const index = state.items.findIndex(
-        (e: cartItem) => e.id === action.payload.id
+        (e: CartItem) => e.id === action.payload.id
       );
       if (state.items[index].amount > 1) {
         state.items[index].amount--;
@@ -34,7 +34,7 @@ const cartSlice = createSlice({
     },
     deleteFromCart: (state, action) => {
       const index = state.items.findIndex(
-        (e: cartItem) => e.id === action.payload.id
+        (e: CartItem) => e.id === action.payload.id
       );
       if (index != -1) {
         state.items.splice(index, 1);

@@ -1,6 +1,6 @@
 import "./HomePage.css";
 import { shallowEqual, useSelector } from "react-redux";
-import { product, rootState } from "../../types";
+import { Product, RootState } from "../../types";
 import Card from "../../components/Card/Card";
 import Header from "../../components/Header/Header";
 import Overlay from "../../components/Overlay/Overlay";
@@ -10,11 +10,11 @@ import { createPortal } from "react-dom";
 function HomePage() {
   const root = document.getElementById("root")!;
   const productData = useSelector(
-    (state: rootState) => state.productData,
+    (state: RootState) => state.productData,
     shallowEqual
   );
   const overlayOpened = useSelector(
-    (state: rootState) => state.ui.isOverlayOpened
+    (state: RootState) => state.ui.isOverlayOpened
   );
 
   function onFormSubmit(values: { username: string; password: string }) {
@@ -28,7 +28,7 @@ function HomePage() {
       {/* <Link to="/product/2">Test Link 2</Link> */}
       <Header></Header>
       <div className="grid">
-        {productData.dataToDisplay.map((e: product, i) => {
+        {productData.dataToDisplay.map((e: Product, i) => {
           return <Card product={e} key={i}></Card>;
         })}
       </div>

@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { settingsState } from "./types";
+import { SettingsState } from "./types";
 
 const initialState = {
   darkMode: false,
-} as settingsState;
+} as SettingsState;
 
 const settingsSlice = createSlice({
   name: "settings",

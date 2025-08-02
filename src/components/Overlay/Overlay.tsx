@@ -1,5 +1,5 @@
 import "./Overlay.less";
-import { rootState } from "../../types";
+import { RootState } from "../../types";
 import { useDispatch, useSelector } from "react-redux";
 import { setOverlayClosed } from "../../features/ui/uiSlice";
 import { useCallback, useEffect } from "react";
@@ -9,7 +9,7 @@ interface Props {
 }
 
 function Overlay({ children }: Props) {
-  const ui = useSelector((state: rootState) => state.ui);
+  const ui = useSelector((state: RootState) => state.ui);
   const dispatch = useDispatch();
 
   function closeOverlay() {

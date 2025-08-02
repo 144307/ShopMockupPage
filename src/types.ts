@@ -1,4 +1,4 @@
-export interface product {
+export interface Product {
   id: number;
   name: string;
   price?: string;
@@ -11,31 +11,31 @@ export interface product {
 //   amount: number;
 // }
 
-export interface cartItem extends product {
+export interface CartItem extends product {
   amount: number;
 }
 
-export interface cartState {
-  items: cartItem[];
+export interface CartState {
+  items: CartItem[];
 }
 
-export interface settingsState {
+export interface SettingsState {
   darkMode: boolean;
 }
 
-export interface dataState {
-  data: product[];
-  dataToDisplay: product[];
+export interface DataState {
+  data: Product[];
+  dataToDisplay: Product[];
 }
 
-export interface uiState {
+export interface UIState {
   isOverlayOpened: boolean;
   isCartOpened: boolean;
 }
 
-export interface rootState {
-  cart: cartState;
-  settings: settingsState;
-  productData: dataState;
-  ui: uiState;
+export interface RootState {
+  cart: CartState;
+  settings: SettingsState;
+  productData: DataState;
+  ui: UIState;
 }

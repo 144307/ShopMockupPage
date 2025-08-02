@@ -1,8 +1,13 @@
 import "./Form.less";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
-import { rootState } from "../../types";
+import { RootState } from "../../types";
 import { setOverlayClosed } from "../../features/ui/uiSlice";
+
+// enum Mode {
+//   signup = "signup",
+//   login = "login",
+// }
 
 interface Props {
   mode: "signup" | "login";
@@ -16,7 +21,7 @@ interface Errors {
 }
 
 function Form({ mode: mode, onSubmit: onSubmit }: Props) {
-  const ui = useSelector((state: rootState) => state.ui);
+  const ui = useSelector((state: RootState) => state.ui);
   const dispatch = useDispatch();
 
   const form = useRef<HTMLFormElement>(null);
@@ -92,19 +97,19 @@ function Form({ mode: mode, onSubmit: onSubmit }: Props) {
         valid = false;
       } else {
         if (confirmPassword.length < 8) {
-          newErrors.password.push("Must be longer then 8 characters");
+          newErrors.password.push("Must be longer than 8 characters");
           newErrors.confirmPassword.push("Must be longer then 8 characters");
           valid = false;
         }
         if (!hasCapitalLetter.test(confirmPassword)) {
-          newErrors.password.push("Must have at lease one capital letter");
+          newErrors.password.push("Must have at least one capital letter");
           newErrors.confirmPassword.push(
             "Must have at lease one capital letter"
           );
           valid = false;
         }
         if (!hasNumber.test(confirmPassword)) {
-          newErrors.password.push("Must have at lease one number");
+          newErrors.password.push("Must have at least one number");
           newErrors.confirmPassword.push("Must have at lease one number");
           valid = false;
         }
